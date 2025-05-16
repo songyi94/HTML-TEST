@@ -1,0 +1,388 @@
+/* css/schedule_management.css - 排班管理页面的特定样式 (新风格) */
+
+/* --- 基础和全局 --- */
+body, html {
+    /* 如果需要，可以在这里覆盖 dashboard_layout.css 中的一些基础设置 */
+}
+
+.schedule-management-content {
+    /* background-color: #f4f4f4; */ /* 页面背景，可以根据整体风格调整 */
+    /* padding: 20px; */
+    display: flex; /* 新增：使其成为flex容器 */
+    flex-direction: column; /* 新增：主轴为垂直方向 */
+    flex-grow: 1; /* 新增：使其填充父容器（.content-wrapper）的可用空间 */
+}
+
+.schedule-management-content h2 {
+    display: none; /* 隐藏原有的 "排班日历" 标题，新设计在日历头中体现 */
+}
+
+/* --- 日历容器整体 --- */
+.calendar-container-wrapper { /* 新增一个包裹元素，方便整体定位和背景 */
+    /* max-width: 1280px; */ /* 移除最大宽度限制 */
+    width: 100%; /* 设置宽度为100%，以撑满父容器 */
+    margin: 20px 0; /* 上下边距20px，左右无边距，不再居中 */
+    background-color: #fff; /* 日历主体背景白色 */
+    border-radius: 10px; /* 圆角 */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1); /* 更明显的阴影 */
+    padding: 20px; /* 调整内边距 */
+    border: 1px solid #e0e0e0;
+    display: flex; /* 新增：使其成为flex容器 */
+    flex-direction: column; /* 新增：主轴为垂直方向 */
+    /* height: 100%; */ /* 旧：尝试填充父容器高度 */
+    flex-grow: 1; /* 修改：使其填充父容器（.schedule-management-content）的可用空间 */
+    box-sizing: border-box; /* 新增：确保padding和border在height计算内 */
+}
+
+/* 新增：主日历布局容器 */
+.calendar-layout-container {
+    display: flex; /* 使用flex布局实现两栏 */
+    gap: 25px; /* 两栏之间的间距 */
+    /* align-items: flex-start; */ /* 旧：使左右两栏顶部对齐 */
+    align-items: stretch; /* 修改：使子元素（左右面板）在交叉轴上拉伸以填充容器高度 */
+    flex-grow: 1; /* 新增：使其填充 calendar-container-wrapper 的剩余垂直空间 */
+}
+
+/* 左侧栏：月份和引言 */
+.calendar-left-panel {
+    flex: 0 0 280px; /* 左侧固定宽度，可调整 */
+    /* border-right: 1px solid #f0f0f0; */ /* 可选的分隔线 */
+    /* padding-right: 20px; */
+    display: flex;
+    flex-direction: column; /* 使内部元素垂直排列 */
+}
+
+/* 右侧栏：控制和日历网格 */
+.calendar-right-panel {
+    flex: 1; /* 右侧占据剩余空间 */
+    display: flex;
+    flex-direction: column; /* 使内部元素垂直排列 */
+    /* height: 100%; */ /* 可选，如果父级align-items:stretch，则不需要显式100% */
+}
+
+/* --- 左侧面板中的月份显示 (包含箭头按钮) --- */
+.calendar-month-display { 
+    display: flex; /* 新增: flex布局 */
+    align-items: center; /* 新增: 垂直居中对齐按钮和文本容器 */
+    justify-content: space-between; /* 新增: 两侧按钮，中间文本 */
+    text-align: center; 
+    margin-bottom: 15px; /* 与下方控件的间距调整 */
+}
+
+.calendar-month-display .month-text-container { /* 包裹中文和英文月份的容器 */
+    flex-grow: 1; /* 占据中间空间 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calendar-month-display .chinese-month {
+    font-size: 3.5em; /* 稍微调整大小以适应按钮 */
+    font-weight: bold;
+    color: #333;
+    line-height: 1;
+    margin-bottom: 3px; /* 调整与英文月份的间距 */
+    font-family: 'KaiTi', 'SimSun', sans-serif; 
+}
+
+.calendar-month-display .english-year-month {
+    font-size: 1em; /* 稍微调整大小 */
+    color: #777;
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+}
+
+/* 调整月份切换按钮样式 (现在在月份显示的两侧) */
+.calendar-month-display > button { /* 直接子按钮 */
+    background-color: transparent; 
+    color: #007bff;
+    border: none; /* 移除边框，使其更像图标按钮 */
+    padding: 5px 8px; /* 调整内边距 */
+    font-size: 1.5em; /* 增大字体大小作为图标 */
+    font-weight: bold;
+    border-radius: 50%; /* 圆形按钮 */
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    flex-shrink: 0; /* 防止按钮被压缩 */
+}
+
+.calendar-month-display > button:hover {
+    background-color: #f0f0f0; /* 轻微背景反馈 */
+    color: #0056b3;
+}
+
+/* --- 左侧面板中移过来的控件 (今天按钮和筛选器) --- */
+.moved-calendar-controls {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: 15px; /* 调整间距 */
+    margin-bottom: 20px; 
+    width: 100%; 
+}
+
+.moved-calendar-controls #todayBtn { /* 单独设置Today按钮样式，因为它现在是独立的 */
+    background-color: transparent; 
+    color: #007bff;
+    border: 1px solid #007bff;
+    padding: 6px 15px; /* 调整padding */
+    border-radius: 20px; 
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.moved-calendar-controls #todayBtn:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.moved-calendar-controls .staff-filter-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9em;
+}
+
+.moved-calendar-controls #staffFilter {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 8px;
+}
+
+/* --- 左侧面板中的引言区 --- */
+.calendar-motivation-quote {
+    padding: 15px;
+    min-height: 60px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #f9f9f9;  
+    border-radius: 5px;
+    font-size: 1em; 
+    color: #555;
+    font-style: italic;
+    width: 100%; 
+}
+
+/* --- 右侧面板中旧的日历控制行 (确保不占空间) --- */
+.calendar-right-panel .calendar-controls {
+    height: 0; /* 设为0，使其不占垂直空间 */
+    padding: 0;
+    margin: 0;
+    border: none;
+    overflow: hidden; /* 确保内部内容（即使隐藏）也不会撑开它 */
+}
+
+#currentMonthYear {
+    display: none !important; 
+}
+
+/* 新增：为 .calendar-grid 添加样式，使其参与flex高度分配 */
+.calendar-grid {
+    display: flex; /* 使其成为flex容器 */
+    flex-direction: column; /* 主轴为垂直方向 */
+    flex-grow: 1; /* 占据其父容器（.calendar-right-panel）的剩余垂直空间 */
+    overflow: hidden; /* 可选：防止内部元素意外溢出影响布局 */
+}
+
+/* --- 星期表头 --- */
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    width: 100%; 
+    /* border-top: 1px solid #eee; */ /* 可选：如果希望在星期行上方有分割线 */
+}
+
+.weekday-header {
+    font-weight: 600; 
+    color: #555; 
+    padding: 8px 0;
+    font-size: 0.85em;
+    text-transform: uppercase; 
+}
+
+/* --- 日期单元格 --- */
+.calendar-days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr); /* 新增：将高度平均分配给6行 */
+    gap: 5px; 
+    width: 100%; 
+    flex-grow: 1; /* 新增：使其填充 .calendar-right-panel 的剩余垂直空间 */
+}
+
+.calendar-day {
+    border: 1px solid #f0f0f0; 
+    /* min-height: 100px; */ /* 移除固定的最小高度 */
+    padding: 6px; 
+    background-color: #fff;
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+    font-size: 0.8em; 
+    position: relative; 
+    transition: box-shadow 0.2s ease;
+    overflow: hidden; 
+}
+.calendar-day:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* 新增：周末单元格背景色 */
+.calendar-day.weekend-day {
+    background-color: lightyellow; /* 浅黄色背景 */
+}
+
+.calendar-day.not-current-month {
+    background-color: #f9f9f9; /* 非当前月份的日期背景色 (浅灰色) */
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05); /* 轻微内阴影 */
+}
+
+/* 新增：法定节假日单元格背景色 */
+.calendar-day.statutory-holiday {
+    background-color: pink; /* 粉红色背景 */
+}
+/* 确保法定节假日的粉色背景优先于周末的黄色和非当前月的灰色 */
+.calendar-day.statutory-holiday.weekend-day,
+.calendar-day.statutory-holiday.not-current-month {
+    background-color: pink; 
+}
+
+/* 新增：特殊调休上班日单元格背景色 */
+.calendar-day.special-workday {
+    background-color: #FFD700; /* 深黄色 (Gold) */
+}
+
+.calendar-day .day-number {
+    font-size: 1.5em; 
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 3px;
+}
+
+/* 新增：节假日名称样式 */
+.calendar-day .holiday-name {
+    font-size: 0.75em;
+    color: #c7254e; /* 深粉色或红色系文字，与粉色背景搭配 */
+    font-weight: bold;
+    margin-top: 2px; /* 与日期数字的间距 */
+    text-align: left; /* 确保在单元格内左对齐 */
+    width: 100%;
+}
+
+.calendar-day.not-current-month .day-number,
+.calendar-day.not-current-month .lunar-info { /* lunar-info selector can be removed */
+    color: #bbb; 
+}
+
+/* .lunar-info { ... } */ /* 农历信息样式已移除 */
+
+.calendar-day.holiday .day-number {
+    color: #d9534f; 
+    font-weight: bold;
+}
+
+.calendar-day.today .day-number {
+    background-color: #d9534f; 
+    color: white;
+    border-radius: 50%;
+    width: 26px; 
+    height: 26px; 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 26px;
+    padding: 0;
+    font-weight: bold;
+}
+
+/* --- 排班条目样式 --- */
+.schedule-entries-container {
+    margin-top: auto; 
+    width: 100%;
+}
+
+.schedule-entry {
+    padding: 2px 5px;
+    margin-top: 2px; 
+    border-radius: 3px;
+    font-size: 0.73em; 
+    line-height: 1.3;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.schedule-entry .entry-person-name {
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 5px; 
+}
+
+.schedule-entry .entry-shift-time {
+    white-space: nowrap; 
+    flex-shrink: 0; 
+}
+
+
+.schedule-entry.day-shift {
+    background-color: #e7f3fe; 
+    color: #0069d9; 
+    border-left: 2px solid #0069d9;
+}
+
+.schedule-entry.night-shift {
+    background-color: #e0f8e6; 
+    color: #107c41; 
+    border-left: 2px solid #107c41;
+}
+
+/* 旧的 .calendar-header class 不再有特别的意义，其子元素已被移动 */
+/* .calendar-header {...} */
+
+/* 原 .calendar-main-header (包含月份和引言的flex容器) 已被分解 */
+/* .calendar-main-header {...} */
+
+/* 移除不必要的重复或冲突规则，上面已有更具体的 */
+/* .calendar-header .calendar-nav-btn { ... } */
+/* .calendar-header .calendar-nav-btn:hover { ... } */
+
+/* 重定义旧的.calendar-header为新的.calendar-controls */
+.calendar-header {
+    display: flex; /* 使用flex布局 */
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.calendar-header .month-navigation { /* HTML中已创建此包裹元素 */
+    order: 1;
+    display: flex;
+}
+.calendar-header .staff-filter-container { /* HTML中已创建此包裹元素 */
+    order: 3;
+}
+
+/* 复用并重定义 .calendar-nav-btn */
+.calendar-header .calendar-nav-btn {
+    background-color: transparent; /* 透明背景 */
+    color: #007bff;
+    border: 1px solid #007bff;
+    padding: 6px 12px;
+    border-radius: 20px; /* 胶囊形状 */
+    font-size: 0.9em;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.calendar-header .calendar-nav-btn:hover {
+    background-color: #007bff;
+    color: #fff;
+} 

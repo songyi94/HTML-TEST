@@ -1,0 +1,113 @@
+<!DOCTYPE html> <!-- 定义文档类型为HTML5 -->
+<html lang="zh-CN"> <!-- 文档语言设置为中文 -->
+<head>
+    <meta charset="UTF-8"> <!-- 设置字符编码为UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 设置视口，用于响应式设计 -->
+    <title>排班管理 - 组装维修小工具</title> <!-- 页面标题 -->
+    <link rel="stylesheet" href="../css/dashboard_layout.css"> <!-- 链接到通用后台布局CSS -->
+    <link rel="stylesheet" href="../css/schedule_management.css"> <!-- 链接到排班管理 spécifiques CSS -->
+</head>
+<body>
+    <div class="dashboard-container"> <!-- 整体仪表盘容器 -->
+        <!-- 左侧菜单栏 -->
+        <aside class="sidebar">
+            <div class="logo">工具系统</div> <!-- 系统Logo或名称 -->
+            <nav>
+                <ul>
+                    <li><a href="parts_dashboard.html">备件管理</a></li>
+                    <li><a href="schedule_management.html" class="active">排班管理</a></li> <!-- 当前激活 -->
+                    <li><a href="maintenance_list.html">维修单管理</a></li>
+                    <li><a href="profile.html">个人中心</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 右侧主内容区 -->
+        <main class="main-content-area">
+            <!-- 顶部导航栏 -->
+            <header class="top-navbar">
+                <div class="system-title">排班管理</div> <!-- 当前模块标题 -->
+                <div class="user-info">
+                    <span>欢迎, [用户名]</span> <!-- TODO: 动态显示用户名 -->
+                    <a href="../login.html">退出登录</a> <!-- 退出登录链接 -->
+                </div>
+            </header>
+
+            <!-- 实际页面内容 -->
+            <div class="content-wrapper">
+                <div class="schedule-management-content">
+                    <!-- 新的日历整体包裹容器 -->
+                    <div class="calendar-container-wrapper">
+                        <!-- 模拟活页夹圆环 (移除) -->
+                        <!-- <div class="calendar-binder-rings">
+                            <div class="binder-ring"></div>
+                            <div class="binder-ring"></div>
+                            <div class="binder-ring"></div>
+                            <div class="binder-ring"></div>
+                        </div> -->
+
+                        <!-- 新增：主日历布局容器 (两栏) -->
+                        <div class="calendar-layout-container">
+                            <!-- 左侧栏 -->
+                            <aside class="calendar-left-panel">
+                                <!-- 月份显示区 (包含切换按钮) -->
+                                <div class="calendar-month-display">
+                                    <button id="prevMonthBtn">&lt;</button> 
+                                    <div class="month-text-container"> <!-- 新增容器包裹中文和英文月份 -->
+                                        <div id="chineseMonthDisplay" class="chinese-month">八月</div> <!-- JS填充 -->
+                                        <div id="englishYearMonthDisplay" class="english-year-month">AUGUST 2025</div> <!-- JS填充 -->
+                                    </div>
+                                    <button id="nextMonthBtn">&gt;</button>
+                                </div>
+                                
+                                <!-- 移过来的日历控制按钮和筛选器 (不包含月份切换按钮) -->
+                                <div class="moved-calendar-controls">
+                                    <!-- month-nav-buttons div 已移除，因为按钮移到上方了 -->
+                                    <button id="todayBtn">今天</button>
+                                    <div class="staff-filter-container">
+                                        <label for="staffFilter">人员:</label>
+                                        <select id="staffFilter">
+                                            <option value="all">全部</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- 引言/备注区 -->
+                                <div class="calendar-motivation-quote">
+                                    "没有困难的工作，只有勇敢的打工人！" <!-- 示例引言 -->
+                                </div>
+                            </aside>
+
+                            <!-- 右侧栏 -->
+                            <section class="calendar-right-panel">
+                                <!-- 旧的日历控制行，现在主要用于占位或隐藏 currentMonthYear -->
+                                <div class="calendar-controls">
+                                    <span id="currentMonthYear"></span> <!-- 这个将通过JS或CSS隐藏 -->
+                                </div>
+
+                                <!-- 日历主体网格 -->
+                                <div class="calendar-grid">
+                                    <div class="calendar-weekdays">
+                                        <div class="weekday-header">一</div>
+                                        <div class="weekday-header">二</div>
+                                        <div class="weekday-header">三</div>
+                                        <div class="weekday-header">四</div>
+                                        <div class="weekday-header">五</div>
+                                        <div class="weekday-header">六</div>
+                                        <div class="weekday-header">日</div>
+                                    </div>
+                                    <div id="calendarDays" class="calendar-days-grid">
+                                        <!-- 日期单元格将由JavaScript动态生成 -->
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/schedule_management.js"></script> <!-- 链接到排班管理的JS文件 -->
+</body>
+</html> 

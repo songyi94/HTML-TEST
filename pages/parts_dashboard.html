@@ -1,0 +1,77 @@
+<!DOCTYPE html> <!-- 定义文档类型为HTML5 -->
+<html lang="zh-CN"> <!-- 文档语言设置为中文 -->
+<head>
+    <meta charset="UTF-8"> <!-- 设置字符编码为UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 设置视口，用于响应式设计 -->
+    <title>备件管理主页 - 组装维修小工具</title> <!-- 页面标题 -->
+    <link rel="stylesheet" href="../css/dashboard_layout.css"> <!-- 链接到通用后台布局CSS -->
+    <!-- <link rel="stylesheet" href="../css/style.css"> --> <!-- 如果需要，可以链接全局基础样式 -->
+</head>
+<body>
+    <div class="dashboard-container"> <!-- 整体仪表盘容器 -->
+        <!-- 左侧菜单栏 -->
+        <aside class="sidebar">
+            <div class="logo">工具系统</div> <!-- 系统Logo或名称 -->
+            <nav>
+                <ul>
+                    <!-- 当前激活的菜单项可以添加 'active' class -->
+                    <li><a href="parts_dashboard.html" class="active">备件管理</a></li> <!-- 备件管理链接 -->
+                    <li><a href="../pages/schedule_management.html">排班管理</a></li> <!-- 排班管理链接 (TODO: 创建对应页面) -->
+                    <li><a href="../pages/maintenance_list.html">维修单管理</a></li> <!-- 维修单管理链接 (TODO: 创建对应页面) -->
+                    <li><a href="../pages/profile.html">个人中心</a></li> <!-- 个人中心链接 (TODO: 创建对应页面) -->
+                    <!-- 更多菜单项 -->
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 右侧主内容区 -->
+        <main class="main-content-area">
+            <!-- 顶部导航栏 -->
+            <header class="top-navbar">
+                <div class="system-title">备件管理</div> <!-- 当前模块标题 -->
+                <div class="user-info">
+                    <span>欢迎, [用户名]</span> <!-- TODO: 动态显示用户名 -->
+                    <a href="../login.html">退出登录</a> <!-- 退出登录链接 -->
+                </div>
+            </header>
+
+            <!-- 实际页面内容 -->
+            <div class="content-wrapper">
+                <div class="parts-dashboard-content">
+                    <h2>备件管理主页</h2> <!-- 内容区域主标题 -->
+
+                    <!-- 统计卡片区域 - 只显示备件总数 -->
+                    <section class="stats-cards">
+                        <div class="stat-card">
+                            <h3>备件总数</h3>
+                            <p id="totalPartsCount">加载中...</p>
+                        </div>
+                        <!-- 原有的"库存紧张备件"和"待处理维修"卡片已移除 -->
+                    </section>
+
+                    <!-- 导航按钮区域 -->
+                    <section class="navigation-buttons">
+                        <a href="parts_list.html" class="nav-button">备件列表与操作</a>
+                        <!-- <a href="#" id="addNewPartButtonPage" class="nav-button">添加新备件</a> --> <!-- 移除此按钮 -->
+                        <input type="file" id="excelFileInput" accept=".xlsx, .xls" style="display: none;"> <!-- 隐藏的文件选择框 -->
+                        <button id="importExcelButton" class="nav-button import-excel-btn">导入Excel更新备件</button> <!-- 新增导入按钮 -->
+                        <a href="#" class="nav-button">出库记录查询</a> <!-- TODO: 实现出库记录页面链接 -->
+                    </section>
+
+                    <!-- 导入进度条区域 -->
+                    <section id="importProgressArea" class="progress-area" style="display: none; margin-top: 15px;">
+                        <div id="importStatusText" style="margin-bottom: 5px; font-size: 0.9em; color: #555;">正在准备...</div>
+                        <progress id="importProgressBar" value="0" max="100" style="width: 100%;"></progress>
+                        <span id="importProgressPercent" style="font-size: 0.9em; color: #555; margin-left: 5px;">0%</span>
+                    </section>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/parts_dashboard.js"></script> <!-- 链接到备件管理主页的JS文件 -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script> --> <!-- 原国外CDN -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script> <!-- 替换为国内BootCDN链接 -->
+</body>
+</html> 

@@ -1,0 +1,93 @@
+/* css/style.css - 全局及登录页面样式 */
+
+/* --- 基础重置和全局设置 --- */
+body, html {
+    margin: 0; /* 移除默认的外边距 */
+    padding: 0; /* 移除默认的内边距 */
+    font-family: 'Arial', 'Microsoft YaHei', sans-serif; /* 设置默认字体，优先使用Arial，中文环境使用微软雅黑，最后使用无衬线字体 */
+    background-color: #f4f7f6; /* 设置页面背景颜色为一个柔和的浅灰色 */
+    display: flex; /* 使用flex布局，方便子元素居中 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    min-height: 100vh; /* 设置body最小高度为视口高度，确保内容在少时也能撑满屏幕并居中 */
+    color: #333; /* 设置默认文字颜色 */
+}
+
+/* --- 登录容器样式 --- */
+.login-container {
+    background-color: #ffffff; /* 登录框背景色为白色 */
+    padding: 30px 40px; /* 内边距，上下30px，左右40px */
+    border-radius: 8px; /* 圆角边框 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 添加阴影效果，增加立体感 */
+    width: 100%; /* 宽度 */
+    max-width: 400px; /* 最大宽度，防止在大屏幕上过宽 */
+    text-align: center; /* 内部文本居中 */
+}
+
+.login-container h1 {
+    color: #2c3e50; /* 标题颜色，深蓝灰色 */
+    margin-bottom: 25px; /* 标题下边距 */
+    font-size: 24px; /* 标题字号 */
+}
+
+/* --- 表单组样式 --- */
+.form-group {
+    margin-bottom: 20px; /* 表单项之间的下边距 */
+    text-align: left; /* 组内文本左对齐 */
+}
+
+.form-group label {
+    display: block; /* 让标签独占一行 */
+    margin-bottom: 8px; /* 标签和输入框之间的距离 */
+    color: #555; /* 标签文字颜色 */
+    font-weight: bold; /* 字体加粗 */
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: calc(100% - 22px); /* 输入框宽度，减去左右padding和border的宽度 */
+    padding: 10px; /* 输入框内边距 */
+    border: 1px solid #ddd; /* 边框颜色 */
+    border-radius: 4px; /* 圆角 */
+    font-size: 16px; /* 字体大小 */
+    transition: border-color 0.3s ease; /* 边框颜色变化过渡效果 */
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus {
+    border-color: #007bff; /* 输入框获取焦点时的边框颜色，蓝色 */
+    outline: none; /* 移除默认的outline效果 */
+}
+
+/* --- 按钮样式 --- */
+.form-group button {
+    width: 100%; /* 按钮宽度充满容器 */
+    padding: 12px; /* 内边距 */
+    background-color: #007bff; /* 背景颜色，蓝色 */
+    color: white; /* 文字颜色，白色 */
+    border: none; /* 无边框 */
+    border-radius: 4px; /* 圆角 */
+    font-size: 16px; /* 字体大小 */
+    cursor: pointer; /* 鼠标悬停时显示手型光标 */
+    transition: background-color 0.3s ease; /* 背景颜色变化过渡效果 */
+}
+
+.form-group button:hover {
+    background-color: #0056b3; /* 鼠标悬停时按钮背景颜色变深 */
+}
+
+/* --- 注册链接样式 --- */
+.register-link {
+    margin-top: 20px; /* 与上方元素的间距 */
+    font-size: 14px; /* 字体大小 */
+    color: #555; /* 文字颜色 */
+}
+
+.register-link a {
+    color: #007bff; /* 链接颜色，蓝色 */
+    text-decoration: none; /* 去除下划线 */
+}
+
+.register-link a:hover {
+    text-decoration: underline; /* 鼠标悬停时显示下划线 */
+} 

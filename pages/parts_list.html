@@ -1,0 +1,201 @@
+<!DOCTYPE html> <!-- 定义文档类型为HTML5 -->
+<html lang="zh-CN"> <!-- 文档语言设置为中文 -->
+<head>
+    <meta charset="UTF-8"> <!-- 设置字符编码为UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 设置视口，用于响应式设计 -->
+    <title>备件列表 - 组装维修小工具</title> <!-- 页面标题 -->
+    <link rel="stylesheet" href="../css/dashboard_layout.css"> <!-- 链接到通用后台布局CSS -->
+</head>
+<body>
+    <div class="dashboard-container"> <!-- 整体仪表盘容器 -->
+        <!-- 左侧菜单栏 -->
+        <aside class="sidebar">
+            <div class="logo">工具系统</div> <!-- 系统Logo或名称 -->
+            <nav>
+                <ul>
+                    <li><a href="parts_dashboard.html">备件管理</a></li> <!-- 备件管理链接 -->
+                    <!-- TODO: 根据当前页面使对应菜单项高亮 (active class) -->
+                    <li><a href="../pages/schedule_management.html">排班管理</a></li>
+                    <li><a href="../pages/maintenance_list.html">维修单管理</a></li>
+                    <li><a href="../pages/profile.html">个人中心</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 右侧主内容区 -->
+        <main class="main-content-area">
+            <!-- 顶部导航栏 -->
+            <header class="top-navbar">
+                <div class="system-title">备件列表与操作</div> <!-- 当前模块标题 -->
+                <div class="user-info">
+                    <span>欢迎, [用户名]</span> <!-- TODO: 动态显示用户名 -->
+                    <a href="../login.html">退出登录</a> <!-- 退出登录链接 -->
+                </div>
+            </header>
+
+            <!-- 实际页面内容 -->
+            <div class="content-wrapper">
+                <div class="parts-list-content">
+                    <h2>备件列表</h2> <!-- 内容区域主标题 -->
+
+                    <!-- 搜索/筛选区域 (初期简化) -->
+                    <section class="search-filter-section">
+                        <input type="text" id="searchInput" placeholder="按备件名称、编号搜索..."> <!-- 搜索输入框 -->
+                        <button id="searchButton">搜索</button> <!-- 搜索按钮 -->
+                        <button id="addNewPartButton" class="action-btn add-new-btn">新增备件</button> <!-- 新增备件按钮 -->
+                        <!-- TODO: 添加更多筛选条件，如按部门筛选 -->
+                    </section>
+
+                    <!-- 备件列表表格 -->
+                    <section class="parts-table-section">
+                        <table id="partsTable">
+                            <thead> <!-- 表头 -->
+                                <tr>
+                                    <th>备件名称</th> <!-- Part_name -->
+                                    <th>备件描述</th> <!-- Part_description -->
+                                    <th>备件编号</th> <!-- Part_number -->
+                                    <th>数量</th>   <!-- Part_quantity -->
+                                    <th>位置</th>   <!-- Part_location -->
+                                    <th>部门</th>   <!-- Part_department -->
+                                    <th>操作</th>   <!-- 操作列 -->
+                                </tr>
+                            </thead>
+                            <tbody id="partsTableBody"> <!-- 表体，将由JS动态填充 -->
+                                <!-- 表格数据行将在这里插入 -->
+                                <!-- 示例行 (将被JS替换):
+                                <tr>
+                                    <td>示例备件A</td>
+                                    <td>这是一个示例描述</td>
+                                    <td>PN001</td>
+                                    <td>10</td>
+                                    <td>仓库A-01</td>
+                                    <td>生产一部</td>
+                                    <td><button class="action-btn edit-btn">编辑</button> <button class="action-btn">出入库</button></td>
+                                </tr>
+                                -->
+                            </tbody>
+                        </table>
+                        <div id="loadingMessage" style="text-align: center; padding: 20px;">正在加载备件数据...</div> <!-- 加载提示 -->
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 编辑备件模态框 -->
+    <div id="editPartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeEditModalBtn">&times;</span>
+            <h2>编辑备件信息</h2>
+            <form id="editPartForm">
+                <input type="hidden" id="editRecordId">
+                <div class="form-group-modal">
+                    <label for="editPartName">备件名称:</label>
+                    <input type="text" id="editPartName" name="partName" required>
+                </div>
+                <div class="form-group-modal">
+                    <label for="editPartDescription">备件描述:</label>
+                    <textarea id="editPartDescription" name="partDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group-modal">
+                    <label for="editPartNumber">备件编号:</label>
+                    <input type="text" id="editPartNumber" name="partNumber">
+                </div>
+                <div class="form-group-modal">
+                    <label for="editPartLocation">存放位置:</label>
+                    <input type="text" id="editPartLocation" name="partLocation">
+                </div>
+                <div class="form-group-modal">
+                    <label for="editPartDepartment">所属部门:</label>
+                    <input type="text" id="editPartDepartment" name="partDepartment">
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="action-btn">保存更改</button>
+                    <button type="button" class="action-btn" id="cancelEditBtn">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 出库操作模态框 -->
+    <div id="outboundPartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeOutboundModalBtn">&times;</span>
+            <h2>备件出库</h2>
+            <form id="outboundPartForm">
+                <input type="hidden" id="outboundRecordId">
+                <p>备件名称: <span id="outboundPartNameDisplay">-</span></p>
+                <p>当前数量: <span id="outboundCurrentQuantityDisplay">-</span></p>
+                <div class="form-group-modal">
+                    <label for="outboundQuantity">出库数量:</label>
+                    <input type="number" id="outboundQuantity" name="outboundQuantity" min="1" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="action-btn">确认出库</button>
+                    <button type="button" class="action-btn" id="cancelOutboundBtn">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 入库操作模态框 -->
+    <div id="inboundPartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeInboundModalBtn">&times;</span>
+            <h2>备件入库</h2>
+            <form id="inboundPartForm">
+                <input type="hidden" id="inboundRecordId">
+                <p>备件名称: <span id="inboundPartNameDisplay">-</span></p>
+                <div class="form-group-modal">
+                    <label for="inboundQuantity">入库数量:</label>
+                    <input type="number" id="inboundQuantity" name="inboundQuantity" min="1" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="action-btn">确认入库</button>
+                    <button type="button" class="action-btn" id="cancelInboundBtn">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 新增备件模态框 -->
+    <div id="addPartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeAddModalBtn">&times;</span>
+            <h2>新增备件信息</h2>
+            <form id="addPartForm">
+                <div class="form-group-modal">
+                    <label for="addPartName">备件名称:</label>
+                    <input type="text" id="addPartName" name="partName" required>
+                </div>
+                <div class="form-group-modal">
+                    <label for="addPartDescription">备件描述:</label>
+                    <textarea id="addPartDescription" name="partDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group-modal">
+                    <label for="addPartNumber">备件编号:</label>
+                    <input type="text" id="addPartNumber" name="partNumber">
+                </div>
+                <div class="form-group-modal">
+                    <label for="addPartQuantity">初始数量:</label>
+                    <input type="number" id="addPartQuantity" name="partQuantity" min="0" value="0" required>
+                </div>
+                <div class="form-group-modal">
+                    <label for="addPartLocation">存放位置:</label>
+                    <input type="text" id="addPartLocation" name="partLocation">
+                </div>
+                <div class="form-group-modal">
+                    <label for="addPartDepartment">所属部门:</label>
+                    <input type="text" id="addPartDepartment" name="partDepartment">
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="action-btn">确认新增</button>
+                    <button type="button" class="action-btn" id="cancelAddBtn">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/parts_list.js"></script> <!-- 链接到备件列表的JS文件 -->
+</body>
+</html> 

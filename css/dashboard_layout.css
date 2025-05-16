@@ -1,0 +1,553 @@
+/* css/dashboard_layout.css - 后台管理界面的通用布局样式 */
+
+/* --- 基础设置 --- */
+body, html {
+    margin: 0; /* 移除默认外边距 */
+    padding: 0; /* 移除默认内边距 */
+    font-family: 'Arial', 'Microsoft YaHei', sans-serif; /* 全局字体 */
+    background-color: #f0f2f5; /* 页面背景色，比登录页稍深一点的灰色 */
+    color: #333; /* 默认文字颜色 */
+    height: 100%; /* HTML和Body高度占满视口 */
+}
+
+/* --- 整体容器 --- */
+.dashboard-container {
+    display: flex; /* 使用flex布局实现左侧菜单和右侧内容区域的排列 */
+    height: 100vh; /* 容器高度占满整个视口高度 */
+}
+
+/* --- 左侧菜单栏 --- */
+.sidebar {
+    width: 220px; /* 菜单栏宽度 */
+    background-color: #001529; /* 菜单栏背景色，深蓝色 */
+    color: #fff; /* 文字颜色为白色 */
+    padding-top: 20px; /* 顶部内边距 */
+    height: 100%; /* 高度占满父容器 */
+    overflow-y: auto; /* 如果内容过多，允许垂直滚动 */
+}
+
+.sidebar .logo {
+    text-align: center; /* Logo文字居中 */
+    padding-bottom: 20px; /* Logo下方边距 */
+    font-size: 24px; /* Logo字号 */
+    font-weight: bold; /* Logo字体加粗 */
+    color: #fff; /* Logo颜色 */
+    border-bottom: 1px solid #002140; /* Logo下方分割线 */
+    margin-bottom: 10px; /* Logo区域整体下边距 */
+}
+
+.sidebar nav ul {
+    list-style-type: none; /* 移除列表默认的项目符号 */
+    padding: 0; /* 移除默认内边距 */
+    margin: 0; /* 移除默认外边距 */
+}
+
+.sidebar nav li a {
+    display: block; /* 链接为块级元素，占满整行 */
+    padding: 12px 20px; /* 内边距 */
+    color: #a6adb4; /* 链接文字颜色，稍浅的灰色 */
+    text-decoration: none; /* 去除下划线 */
+    transition: background-color 0.3s, color 0.3s; /* 背景和颜色过渡效果 */
+    font-size: 15px; /* 字体大小 */
+}
+
+.sidebar nav li a:hover,
+.sidebar nav li a.active { /* 激活状态或鼠标悬停状态 */
+    background-color: #1890ff; /* 背景变为蓝色 */
+    color: #fff; /* 文字变为白色 */
+}
+
+/* --- 右侧内容区 --- */
+.main-content-area {
+    flex-grow: 1; /*占据剩余空间*/
+    display: flex; /* 使用flex布局，方便内部 header 和 content-wrapper 的排列 */
+    flex-direction: column; /* 垂直排列 header 和 content-wrapper */
+}
+
+/* --- 顶部导航栏 --- */
+.top-navbar {
+    height: 60px; /* 顶部导航栏高度 */
+    background-color: #ffffff; /* 背景色白色 */
+    padding: 0 20px; /* 左右内边距 */
+    display: flex; /* 使用flex布局 */
+    align-items: center; /* 垂直居中子元素 */
+    justify-content: space-between; /* 子元素两端对齐 */
+    box-shadow: 0 1px 4px rgba(0,21,41,.08); /* 底部阴影 */
+    z-index: 10; /*确保在其他内容之上*/
+}
+
+.top-navbar .system-title {
+    font-size: 20px; /* 系统标题字号 */
+    color: #001529; /* 颜色与侧边栏背景呼应 */
+}
+
+.top-navbar .user-info {
+    font-size: 14px; /* 用户信息字号 */
+    /* 可以在这里添加更多用户相关的样式，如头像、下拉菜单等 */
+}
+
+.top-navbar .user-info a {
+    color: #007bff; /* 链接颜色 */
+    text-decoration: none; /* 无下划线 */
+    margin-left: 10px; /* 左边距 */
+}
+
+.top-navbar .user-info a:hover {
+    text-decoration: underline; /* 悬停时加下划线 */
+}
+
+/* --- 主内容包装器 (顶部导航栏下方，实际页面内容区域) --- */
+.content-wrapper {
+    flex-grow: 1; /* 占据剩余的垂直空间 */
+    padding: 25px; /* 内边距 */
+    background-color: #f0f2f5; /* 背景色与body一致 */
+    overflow-y: auto; /* 如果内容过多，允许垂直滚动 */
+    display: flex; /* 新增：使其成为flex容器 */
+    flex-direction: column; /* 新增：主轴为垂直方向 */
+}
+
+/* --- 备件管理主页特定样式 --- */
+.parts-dashboard-content h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+.stats-cards {
+    display: flex; /* 卡片使用flex布局 */
+    gap: 20px; /* 卡片之间的间距 */
+    margin-bottom: 30px; /* 统计卡片区域下边距 */
+}
+
+.stat-card {
+    background-color: #fff; /* 卡片背景白色 */
+    padding: 20px; /* 内边距 */
+    border-radius: 8px; /* 圆角 */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.09); /* 轻微阴影 */
+    flex-grow: 1; /* 卡片等分布局 */
+    text-align: center; /* 文字居中 */
+}
+
+.stat-card h3 {
+    margin: 0 0 10px 0; /* 标题下边距 */
+    font-size: 16px; /* 字体大小 */
+    color: #555;
+}
+
+.stat-card p {
+    margin: 0;
+    font-size: 28px; /* 数字大小 */
+    font-weight: bold;
+    color: #1890ff;
+}
+
+.navigation-buttons {
+    display: flex;
+    flex-wrap: wrap; /* 允许换行 */
+    gap: 15px; /* 按钮间距 */
+}
+
+.navigation-buttons .nav-button {
+    background-color: #1890ff; /* 按钮背景色 */
+    color: white; /* 文字颜色 */
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none; /* 去除链接下划线 */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.navigation-buttons .nav-button:hover {
+    background-color: #0056b3; /* 鼠标悬停颜色加深 */
+}
+
+/* "导入Excel更新备件"按钮的特定样式 */
+.navigation-buttons .import-excel-btn {
+    background-color: #ffc107; /* 使用黄色作为导入操作的醒目颜色 */
+    color: #212529; /* 深色文字以保证对比度 */
+    border: 1px solid #dda800;
+}
+
+.navigation-buttons .import-excel-btn:hover {
+    background-color: #e0a800; /* 悬停时颜色加深 */
+    border-color: #c99700;
+}
+
+/* --- 导入进度条区域样式 --- */
+.progress-area {
+    background-color: #f9f9f9; /* 浅灰色背景 */
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.progress-area #importProgressBar {
+    width: calc(100% - 50px); /* 减去百分比文本的宽度和一些间距 */
+    height: 20px;
+    vertical-align: middle;
+}
+
+/* 可选：为不同浏览器统一样式 (更复杂的样式可以后续添加) */
+.progress-area progress[value] {
+    /* 清除默认外观 */
+    -webkit-appearance: none;
+    appearance: none;
+    border: none; /* 移除边框 */
+    border-radius: 10px; /* 圆角 */
+    overflow: hidden; /* 确保内部条的圆角 */
+}
+
+/* WebKit (Chrome, Safari) 进度条轨道 */
+.progress-area progress[value]::-webkit-progress-bar {
+    background-color: #eee;
+    border-radius: 10px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
+
+/* WebKit 进度条填充 */
+.progress-area progress[value]::-webkit-progress-value {
+    background-color: #007bff; /* 蓝色填充 */
+    border-radius: 10px;
+    transition: width 0.2s ease-out; /* 平滑过渡效果 */
+}
+
+/* Firefox 进度条填充 (可能需要 !important 或更具体的选择器) */
+.progress-area progress[value]::-moz-progress-bar {
+    background-color: #007bff; /* 蓝色填充 */
+    border-radius: 10px;
+    transition: width 0.2s ease-out;
+}
+
+.progress-area #importProgressPercent {
+    display: inline-block;
+    width: 40px; /* 给百分比文本一个固定宽度 */
+    text-align: right;
+    vertical-align: middle;
+}
+
+/* === 备件列表页面 (parts_list.html) 特定样式 === */
+.parts-list-content h2 {
+    color: #333; /* 标题颜色 */
+    margin-bottom: 20px; /* 下边距 */
+    font-size: 22px; /* 字体大小 */
+}
+
+/* --- 搜索/筛选区域样式 --- */
+.search-filter-section {
+    margin-bottom: 20px; /* 与下方表格的间距 */
+    padding: 15px;
+    background-color: #fff; /* 背景白色 */
+    border-radius: 6px; /* 圆角 */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* 轻微阴影 */
+    display: flex; /* 使用flex布局 */
+    gap: 10px; /* 子元素间距 */
+    align-items: center; /* 垂直居中 */
+}
+
+.search-filter-section input[type="text"] {
+    padding: 8px 12px; /* 内边距 */
+    border: 1px solid #ddd; /* 边框 */
+    border-radius: 4px; /* 圆角 */
+    font-size: 14px; /* 字体大小 */
+    flex-grow: 1; /* 占据可用空间 */
+}
+
+.search-filter-section button {
+    padding: 8px 15px; /* 内边距 */
+    background-color: #007bff; /* 背景蓝色 (同登录按钮) */
+    color: white; /* 文字白色 */
+    border: none; /* 无边框 */
+    border-radius: 4px; /* 圆角 */
+    cursor: pointer; /* 鼠标手型 */
+    font-size: 14px; /* 字体大小 */
+    transition: background-color 0.3s ease; /* 过渡效果 */
+}
+
+.search-filter-section button:hover {
+    background-color: #0056b3; /* 悬停颜色加深 */
+}
+
+/* --- "新增备件"按钮特定样式 --- */
+.search-filter-section .add-new-btn {
+    background-color: #28a745; /* 使用绿色作为"新增"操作的主题色 */
+    border-color: #28a745;
+    color: white;
+}
+
+.search-filter-section .add-new-btn:hover {
+    background-color: #218838; /* 悬停时颜色加深 */
+    border-color: #1e7e34;
+}
+
+/* --- 表格区域样式 --- */
+.parts-table-section {
+    background-color: #fff; /* 背景白色 */
+    padding: 20px; /* 内边距 */
+    border-radius: 6px; /* 圆角 */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* 轻微阴影 */
+    overflow-x: auto; /* 内容超出时允许水平滚动，以防表格过宽 */
+}
+
+#partsTable {
+    width: 100%; /* 表格宽度100% */
+    border-collapse: collapse; /* 边框合并 */
+    font-size: 14px; /* 基础字体大小 */
+}
+
+#partsTable th, #partsTable td {
+    border: 1px solid #e8e8e8; /* 单元格边框 */
+    padding: 10px 12px; /* 单元格内边距 */
+    text-align: left; /* 文字左对齐 */
+    vertical-align: middle; /* 内容垂直居中 */
+    white-space: nowrap; /* 防止单元格内容换行，与overflow-x配合 */
+}
+
+#partsTable thead th {
+    background-color: #f8f8f8; /* 表头背景色 */
+    color: #555; /* 表头文字颜色 */
+    font-weight: bold; /* 字体加粗 */
+}
+
+#partsTable tbody tr:nth-child(even) {
+    background-color: #fcfcfc; /* 偶数行背景色 (斑马条纹) */
+}
+
+#partsTable tbody tr:hover {
+    background-color: #f0f8ff; /* 鼠标悬停行背景色 (淡蓝色) */
+}
+
+/* --- 表格中的操作按钮样式 --- */
+.action-btn {
+    padding: 5px 10px; /* 内边距 */
+    margin-right: 5px; /* 右边距 */
+    border: 1px solid transparent; /* 边框 */
+    border-radius: 3px; /* 圆角 */
+    cursor: pointer; /* 鼠标手型 */
+    font-size: 13px; /* 字体大小 */
+    transition: all 0.3s ease; /* 过渡效果 */
+}
+
+.action-btn.edit-btn {
+    background-color: #1890ff; /* 编辑按钮背景色 - 蓝色 */
+    color: white; /* 文字白色 */
+}
+.action-btn.edit-btn:hover {
+    background-color: #007bff; /* 编辑按钮悬停颜色加深 */
+}
+
+.action-btn.delete-btn { /* 假设未来有删除按钮 */
+    background-color: #ff4d4f; /* 删除按钮背景色 - 红色 */
+    color: white; /* 文字白色 */
+}
+.action-btn.delete-btn:hover {
+    background-color: #d9363e; /* 删除按钮悬停颜色加深 */
+}
+
+.action-btn.outbound-btn { /* 出库按钮 */
+    background-color: #52c41a; /* 出库按钮背景色 - 绿色 */
+    color: white;
+}
+.action-btn.outbound-btn:hover {
+    background-color: #389e0d;
+}
+
+.action-btn.inbound-btn { /* 入库按钮 */
+    background-color: #faad14; /* 入库按钮背景色 - 橙色 */
+    color: white;
+}
+.action-btn.inbound-btn:hover {
+    background-color: #d48806;
+}
+
+/* === 通用模态框样式 (Modal) === */
+.modal {
+    display: none; /* 默认隐藏 */
+    position: fixed; /* 固定定位，覆盖整个页面 */
+    z-index: 1000; /* 确保在顶层 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* 如果内容过长则允许滚动 */
+    background-color: rgba(0,0,0,0.6); /* 半透明黑色背景遮罩 */
+}
+
+.modal-content {
+    background-color: #fefefe; /* 模态框内容背景白色 */
+    margin: 10% auto; /* 上下边距10%，左右自动居中，可以根据内容调整 */
+    padding: 25px 30px; /* 内边距 */
+    border: 1px solid #888; /* 边框 */
+    border-radius: 8px; /* 圆角 */
+    width: 80%; /* 模态框宽度 */
+    max-width: 600px; /* 最大宽度，防止在大屏幕上过宽 */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* 阴影效果 */
+    position: relative; /* 用于关闭按钮的绝对定位 */
+}
+
+.close-btn {
+    color: #aaa; /* 关闭按钮颜色 */
+    float: right; /* 浮动到右上角 */
+    font-size: 28px; /* 字体大小 */
+    font-weight: bold; /* 字体加粗 */
+    position: absolute; /* 绝对定位 */
+    top: 10px; /* 距离顶部 */
+    right: 20px; /* 距离右侧 */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* 鼠标悬停或聚焦时颜色变黑 */
+    text-decoration: none; /* 去除下划线 */
+    cursor: pointer; /* 鼠标手型 */
+}
+
+.modal-content h2 {
+    margin-top: 0; /* 移除顶部外边距，让标题更紧凑 */
+    margin-bottom: 25px; /* 标题和表单内容之间的间距，适当增加 */
+    text-align: center; /* 标题居中 */
+    font-size: 20px; /* 统一模态框标题字号 */
+    color: #333;
+}
+
+/* --- 模态框内表单组通用样式 --- */
+.form-group-modal {
+    margin-bottom: 18px; /* 表单项之间的下边距 */
+}
+
+.form-group-modal label {
+    display: block; /* 标签独占一行 */
+    margin-bottom: 8px; /* 标签和输入框之间的距离 */
+    color: #495057; /* 标签文字颜色，更柔和的深灰色 */
+    font-weight: bold; /* 字体加粗 */
+    font-size: 14px;
+}
+
+.form-group-modal input[type="text"],
+.form-group-modal input[type="number"],
+.form-group-modal textarea {
+    width: 100%; /* 输入框/文本域宽度占满容器 */
+    padding: 10px 12px; /* 内边距 */
+    border: 1px solid #ced4da; /* 边框颜色，更柔和 */
+    border-radius: 4px; /* 圆角 */
+    font-size: 14px; /* 字体大小 */
+    box-sizing: border-box; /* 防止padding和border撑大元素 */
+    line-height: 1.5; /* 增加行高，使文本更易读 */
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* 过渡效果 */
+}
+
+.form-group-modal input[type="text"]:focus,
+.form-group-modal input[type="number"]:focus,
+.form-group-modal textarea:focus {
+    border-color: #80bdff; /* 聚焦时边框颜色变为蓝色 */
+    outline: 0; /* 移除默认的outline */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* 添加类似Bootstrap的聚焦阴影效果 */
+}
+
+.form-group-modal textarea {
+    resize: vertical; /* 允许用户垂直调整文本域大小 */
+    min-height: calc(1.5em * 3 + 20px + 2px); /* 确保textarea至少有设置的rows那么高，加上padding和border */
+}
+
+/* 出库/入库模态框中的信息展示段落 */
+.modal-content p {
+    margin-bottom: 12px; /* 信息行之间的间距 */
+    font-size: 15px; /* 稍大一点的字体 */
+    color: #333;
+    line-height: 1.6;
+}
+
+.modal-content p label {
+    font-weight: bold;
+    color: #555;
+    margin-right: 5px;
+}
+
+.modal-content p span {
+    font-weight: normal; /* 信息值不再额外加粗，靠label加粗区分 */
+    color: #007bff; /* 值的颜色保持不变 */
+}
+
+/* --- 模态框操作按钮区域统一样式 --- */
+.modal-actions {
+    margin-top: 25px; /* 与上方元素的间距 */
+    text-align: right; /* 按钮默认右对齐 */
+    padding-top: 15px; /* 按钮区域顶部加一点内边距 */
+    border-top: 1px solid #e9ecef; /* 在按钮区域上方加一条分割线 */
+}
+
+.modal-actions .action-btn {
+    padding: 8px 18px; /* 按钮内边距调整，使其更饱满 */
+    margin-left: 10px; /* 按钮之间的左边距 */
+    font-size: 14px; /* 字体大小 */
+    font-weight: 500; /* 按钮文字稍加粗 */
+    border-radius: 4px; /* 圆角 */
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.modal-actions .action-btn:first-child {
+    margin-left: 0; /* 第一个按钮通常不需要左边距，如果右对齐的话 */
+}
+
+/* 编辑模态框的保存按钮（通常是主操作按钮） */
+#editPartForm .action-btn[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}
+#editPartForm .action-btn[type="submit"]:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* 通用取消按钮样式 */
+.modal-actions .action-btn[id*="cancel"], /* 匹配所有ID包含cancel的按钮 */
+.modal-actions .action-btn[type="button"]:not([type="submit"]) /* 备用，非submit的button */
+{
+    background-color: #6c757d;
+    color: white;
+    border: 1px solid #6c757d;
+}
+.modal-actions .action-btn[id*="cancel"]:hover,
+.modal-actions .action-btn[type="button"]:not([type="submit"]):hover
+{
+    background-color: #545b62;
+    border-color: #545b62;
+}
+
+/* 特别为出库确认按钮添加一点视觉提示 (可选) */
+#outboundPartForm button[type="submit"] {
+    background-color: #dc3545; /* 例如使用红色表示警示或重要操作 */
+    border-color: #dc3545;
+    color: white;
+}
+#outboundPartForm button[type="submit"]:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* 特别为入库确认按钮添加一点视觉提示 (可选) */
+#inboundPartForm button[type="submit"] {
+    background-color: #28a745; /* 例如使用绿色表示积极操作 */
+    border-color: #28a745;
+    color: white;
+}
+#inboundPartForm button[type="submit"]:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+/* --- 新增备件模态框"确认新增"按钮样式 --- */
+#addPartForm button[type="submit"] {
+    background-color: #007bff; /* 主操作按钮使用蓝色 */
+    border-color: #007bff;
+    color: white;
+}
+#addPartForm button[type="submit"]:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+} 
