@@ -16,9 +16,9 @@
                 <ul>
                     <!-- 当前激活的菜单项可以添加 'active' class -->
                     <li><a href="parts_dashboard.html" class="active">备件管理</a></li> <!-- 备件管理链接 -->
-                    <li><a href="../pages/schedule_management.html">排班管理</a></li> <!-- 排班管理链接 (TODO: 创建对应页面) -->
-                    <li><a href="../pages/maintenance_list.html">维修单管理</a></li> <!-- 维修单管理链接 (TODO: 创建对应页面) -->
-                    <li><a href="../pages/profile.html">个人中心</a></li> <!-- 个人中心链接 (TODO: 创建对应页面) -->
+                    <li><a href="schedule_management.html">排班管理</a></li> <!-- 排班管理链接 -->
+                    <li><a href="maintenance_list.html">维修单管理</a></li> <!-- 维修单管理链接 -->
+                    <li><a href="profile.html">个人中心</a></li> <!-- 个人中心链接 -->
                     <!-- 更多菜单项 -->
                 </ul>
             </nav>
@@ -46,13 +46,13 @@
                             <h3>备件总数</h3>
                             <p id="totalPartsCount">加载中...</p>
                         </div>
-                        <!-- 原有的"库存紧张备件"和"待处理维修"卡片已移除 -->
+                        <!-- 原有的\"库存紧张备件\"和\"待处理维修\"卡片已移除 -->
                     </section>
 
                     <!-- 导航按钮区域 -->
                     <section class="navigation-buttons">
                         <a href="parts_list.html" class="nav-button">备件列表与操作</a>
-                        <!-- <a href="#" id="addNewPartButtonPage" class="nav-button">添加新备件</a> --> <!-- 移除此按钮 -->
+                        <!-- <a href="#" id="addNewPartButtonPage" class="nav-button\">添加新备件</a> --> <!-- 移除此按钮 -->
                         <input type="file" id="excelFileInput" accept=".xlsx, .xls" style="display: none;"> <!-- 隐藏的文件选择框 -->
                         <button id="importExcelButton" class="nav-button import-excel-btn">导入Excel更新备件</button> <!-- 新增导入按钮 -->
                         <a href="#" class="nav-button">出库记录查询</a> <!-- TODO: 实现出库记录页面链接 -->

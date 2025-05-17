@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (passwordInput === storedPassword) {
                             // alert('登录成功！欢迎回来, ' + usernameInput + '!'); // 登录成功提示
                             // 实际项目中，登录成功后通常会跳转到主页面或仪表盘
-                            window.location.href = '../pages/parts_dashboard.html'; // 跳转到备件管理主页，路径已根据 public/index.html 的位置更新
+                            window.location.href = 'pages/parts_dashboard.html'; // 跳转到备件管理主页，路径已根据 public/ 目录结构更新
                         } else {
                             alert('登录失败！密码错误。');
                         }

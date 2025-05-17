@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 调用函数加载并显示备件数据
     loadAndDisplayParts();
 
-    // --- "新增备件" 按钮事件 --- 
+    // --- \"新增备件\" 按钮事件 --- 
     if (addNewPartButton) {
         addNewPartButton.addEventListener('click', function() {
             openAddPartModal();
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (recordsToDisplay.length === 0) {
                     // 如果没有记录（或没有搜索结果），显示提示信息
                     if (searchTerm) {
-                        loadingMessage.textContent = `没有找到与 "${searchTerm}" 相关的备件。`;
+                        loadingMessage.textContent = `没有找到与 \"${searchTerm}\" 相关的备件。`;
                     } else {
                         loadingMessage.textContent = '沒有找到备件数据。';
                     }
@@ -196,9 +196,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         // 创建操作单元格
                         const actionsCell = row.insertCell();
                         actionsCell.innerHTML = `
-                            <button class="action-btn edit-btn" data-record-id="${record.recordId}">编辑</button>
-                            <button class="action-btn outbound-btn" data-record-id="${record.recordId}">出库</button>
-                            <button class="action-btn inbound-btn" data-record-id="${record.recordId}">入库</button>
+                            <button class=\"action-btn edit-btn\" data-record-id=\"${record.recordId}\">编辑</button>
+                            <button class=\"action-btn outbound-btn\" data-record-id=\"${record.recordId}\">出库</button>
+                            <button class=\"action-btn inbound-btn\" data-record-id=\"${record.recordId}\">入库</button>
                         `; // 添加操作按钮，并带上记录ID以便后续操作
                         // TODO: 为这些按钮添加事件监听器
                     });
@@ -267,12 +267,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // 为模态框的关闭按钮 "×" 添加事件监听
+    // 为模态框的关闭按钮 \"×\" 添加事件监听
     if (closeEditModalBtn) {
         closeEditModalBtn.addEventListener('click', closeEditModal);
     }
 
-    // 为模态框的 "取消" 按钮添加事件监听
+    // 为模态框的 \"取消\" 按钮添加事件监听
     if (cancelEditBtn) {
         cancelEditBtn.addEventListener('click', closeEditModal);
     }
@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (editPartForm) {
         editPartForm.addEventListener('submit', async function(event) {
             event.preventDefault(); // 阻止默认的表单提交
-            const submitButton = editPartForm.querySelector('button[type="submit"]'); // 获取提交按钮
+            const submitButton = editPartForm.querySelector('button[type=\"submit\"]'); // 获取提交按钮
             const originalButtonText = submitButton.textContent; // 保存原始按钮文字
 
             submitButton.disabled = true; // 禁用按钮
@@ -379,12 +379,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // 为出库模态框的关闭按钮 "×" 添加事件监听
+    // 为出库模态框的关闭按钮 \"×\" 添加事件监听
     if (closeOutboundModalBtn) {
         closeOutboundModalBtn.addEventListener('click', closeOutboundModal);
     }
 
-    // 为出库模态框的 "取消" 按钮添加事件监听
+    // 为出库模态框的 \"取消\" 按钮添加事件监听
     if (cancelOutboundBtn) {
         cancelOutboundBtn.addEventListener('click', closeOutboundModal);
     }
@@ -400,7 +400,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (outboundPartForm) {
         outboundPartForm.addEventListener('submit', async function(event) {
             event.preventDefault(); // 阻止默认的表单提交
-            const submitButton = outboundPartForm.querySelector('button[type="submit"]');
+            const submitButton = outboundPartForm.querySelector('button[type=\"submit\"]');
             const originalButtonText = submitButton.textContent;
 
             submitButton.disabled = true;
@@ -490,12 +490,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // 为入库模态框的关闭按钮 "×" 添加事件监听
+    // 为入库模态框的关闭按钮 \"×\" 添加事件监听
     if (closeInboundModalBtn) {
         closeInboundModalBtn.addEventListener('click', closeInboundModal);
     }
 
-    // 为入库模态框的 "取消" 按钮添加事件监听
+    // 为入库模态框的 \"取消\" 按钮添加事件监听
     if (cancelInboundBtn) {
         cancelInboundBtn.addEventListener('click', closeInboundModal);
     }
@@ -520,7 +520,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (inboundPartForm) {
         inboundPartForm.addEventListener('submit', async function(event) {
             event.preventDefault(); // 阻止默认的表单提交
-            const submitButton = inboundPartForm.querySelector('button[type="submit"]');
+            const submitButton = inboundPartForm.querySelector('button[type=\"submit\"]');
             const originalButtonText = submitButton.textContent;
 
             submitButton.disabled = true;
@@ -604,12 +604,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (addPartModal) addPartModal.style.display = 'none';
     }
 
-    // 为新增模态框的关闭按钮 "×" 添加事件监听
+    // 为新增模态框的关闭按钮 \"×\" 添加事件监听
     if (closeAddModalBtn) {
         closeAddModalBtn.addEventListener('click', closeAddPartModal);
     }
 
-    // 为新增模态框的 "取消" 按钮添加事件监听
+    // 为新增模态框的 \"取消\" 按钮添加事件监听
     if (cancelAddBtn) {
         cancelAddBtn.addEventListener('click', closeAddPartModal);
     }
@@ -618,7 +618,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (addPartForm) {
         addPartForm.addEventListener('submit', async function(event) {
             event.preventDefault(); // 阻止表单默认提交行为
-            const submitButton = addPartForm.querySelector('button[type="submit"]');
+            const submitButton = addPartForm.querySelector('button[type=\"submit\"]');
             const originalButtonText = submitButton.textContent;
 
             submitButton.disabled = true;
@@ -639,7 +639,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('备件名称不能为空！');
                 return;
             }
-            // 校验：数量不能为负数 (HTML的min="0"已处理，但JS校验更保险)
+            // 校验：数量不能为负数 (HTML的min=\"0\"已处理，但JS校验更保险)
             if (newPartFields[PART_FIELDS.quantity] < 0) {
                 alert('初始数量不能为负数！');
                 return;

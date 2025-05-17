@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // 注意：维格表的月份筛选通常需要特定格式或使用其日期函数，这里简化为获取整月数据
                 // 一个更精确的方式可能是通过filterByFormula，但这依赖于日期字段的格式
                 // 为简单起见，我们获取整个月，然后客户端过滤。或者，如果知道日期字段是YYYY-MM-DD格式，可以用starts with
-                // const apiUrl = `https://api.vika.cn/fusion/v1/datasheets/${SCHEDULE_DATASHEET_ID}/records?viewId=viwXXXX&fieldKey=name&pageSize=${pageSize}&pageNum=${pageNum}&filterByFormula=AND({${SCHEDULE_FIELDS.date}}>=DATETIME_PARSE("${m.year}-${String(m.month+1).padStart(2,'0')}-01"),{${SCHEDULE_FIELDS.date}}<=DATETIME_PARSE("${m.year}-${String(m.month+1).padStart(2,'0')}-${new Date(m.year, m.month+1,0).getDate()}"))`;
+                // const apiUrl = `https://api.vika.cn/fusion/v1/datasheets/${SCHEDULE_DATASHEET_ID}/records?viewId=viwXXXX&fieldKey=name&pageSize=${pageSize}&pageNum=${pageNum}&filterByFormula=AND({${SCHEDULE_FIELDS.date}}>=DATETIME_PARSE(\"${m.year}-${String(m.month+1).padStart(2,'0')}-01\"),{${SCHEDULE_FIELDS.date}}<=DATETIME_PARSE(\"${m.year}-${String(m.month+1).padStart(2,'0')}-${new Date(m.year, m.month+1,0).getDate()}\"))`;
                 // 上述filterByFormula需要用户确保日期字段是日期类型。如果只是文本，筛选更复杂。
                 // 暂时我们获取记录时不按月份严格筛选，而是依赖后续的JS日期范围判断
                 // 后续优化：如果数据量大，应实现更精确的API级别月份筛选

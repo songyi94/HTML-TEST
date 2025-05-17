@@ -499,29 +499,32 @@ body, html {
     color: white;
     border: 1px solid #007bff;
 }
+
 #editPartForm .action-btn[type="submit"]:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background-color: #0069d9;
+    border-color: #0062cc;
 }
 
-/* 通用取消按钮样式 */
+/* 通用取消按钮样式 (适用于所有模态框) */
 .modal-actions .action-btn[id*="cancel"], /* 匹配所有ID包含cancel的按钮 */
-.modal-actions .action-btn[type="button"]:not([type="submit"]) /* 备用，非submit的button */
-{
-    background-color: #6c757d;
+.modal-actions .action-btn[type="button"]:not([type="submit"]) { /* 或者不是submit类型的button */
+    background-color: #6c757d; /* Bootstrap的次要按钮颜色 */
     color: white;
     border: 1px solid #6c757d;
 }
+
 .modal-actions .action-btn[id*="cancel"]:hover,
-.modal-actions .action-btn[type="button"]:not([type="submit"]):hover
-{
-    background-color: #545b62;
+.modal-actions .action-btn[type="button"]:not([type="submit"]):hover {
+    background-color: #5a6268;
     border-color: #545b62;
 }
 
-/* 特别为出库确认按钮添加一点视觉提示 (可选) */
+
+/* 特定模态框的主操作按钮（如果颜色不同于通用的蓝色） */
+
+/* 出库模态框的"确认出库"按钮 */
 #outboundPartForm button[type="submit"] {
-    background-color: #dc3545; /* 例如使用红色表示警示或重要操作 */
+    background-color: #dc3545; /* 红色，表示有潜在风险或重要操作 */
     border-color: #dc3545;
     color: white;
 }
@@ -530,9 +533,9 @@ body, html {
     border-color: #bd2130;
 }
 
-/* 特别为入库确认按钮添加一点视觉提示 (可选) */
+/* 入库模态框的"确认入库"按钮 */
 #inboundPartForm button[type="submit"] {
-    background-color: #28a745; /* 例如使用绿色表示积极操作 */
+    background-color: #28a745; /* 绿色，表示积极操作 */
     border-color: #28a745;
     color: white;
 }
@@ -541,13 +544,13 @@ body, html {
     border-color: #1e7e34;
 }
 
-/* --- 新增备件模态框"确认新增"按钮样式 --- */
+/* 新增备件模态框的"确认新增"按钮 */
 #addPartForm button[type="submit"] {
-    background-color: #007bff; /* 主操作按钮使用蓝色 */
+    background-color: #007bff; /* 蓝色，与编辑保存一致 */
     border-color: #007bff;
     color: white;
 }
 #addPartForm button[type="submit"]:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background-color: #0069d9;
+    border-color: #0062cc;
 } 
