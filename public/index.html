@@ -1,0 +1,32 @@
+<!DOCTYPE html> <!-- 定义文档类型为HTML5 -->
+<html lang="zh-CN"> <!-- 文档语言设置为中文 -->
+<head>
+    <meta charset="UTF-8"> <!-- 设置字符编码为UTF-8，支持中文字符 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 设置视口，用于响应式设计 -->
+    <title>用户登录 - 组装维修小工具</title> <!-- 页面标题 -->
+    <link rel="stylesheet" href="css/style.css"> <!-- 链接外部CSS样式文件 -->
+</head>
+<body>
+    <div class="login-container"> <!-- 登录表单的容器 -->
+        <h1>用户登录</h1> <!-- 页面主标题 -->
+        <form id="loginForm"> <!-- 登录表单，通过id标识 -->
+            <div class="form-group"> <!-- 表单项分组 -->
+                <label for="username">用户名:</label> <!-- 用户名标签 -->
+                <input type="text" id="username" name="username" required> <!-- 用户名输入框，文本类型，必填 -->
+            </div>
+            <div class="form-group"> <!-- 表单项分组 -->
+                <label for="password">密码:</label> <!-- 密码标签 -->
+                <input type="password" id="password" name="password" required> <!-- 密码输入框，密码类型，必填 -->
+            </div>
+            <div class="form-group"> <!-- 表单项分组 -->
+                <button type="submit">登录</button> <!-- 提交按钮 -->
+            </div>
+        </form>
+        <p class="register-link"> <!-- 注册链接段落 -->
+            还没有账户? <a href="register.html">立即注册</a> <!-- 指向注册页面的链接 -->
+        </p>
+    </div>
+
+    <script src="js/login.js"></script> <!-- 链接外部JavaScript文件 -->
+</body>
+</html> 
