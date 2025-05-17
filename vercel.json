@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 {
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/"
-    }
+  "version": 2,
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "status": 404, "dest": "/index.html" }
   ]
 }
-=======
-{
-"rewrites": [{ "source": "/:path*", "destination": "/login.html" }]
-}
->>>>>>> 14cd4970c80ae04ca26a7300ae6bfbac208c2b41
