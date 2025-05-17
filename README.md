@@ -16,7 +16,7 @@
 
 ### 2.1. 用户管理
 
-*   **登录页 (`index.html`)**:
+*   **登录页 (`public/index.html`)**:
     *   用途: 系统提供安全的用户认证机制。
     *   布局: 包含用户名、密码输入框，登录按钮，注册链接。
     *   样式: 简洁、居中显示。
@@ -133,7 +133,7 @@
 
 *   **代码注释**: 所有 HTML 结构和 CSS 样式，以及 JavaScript 代码的关键部分，都将添加详细的中文注释。
 *   **文件组织**:
-    *   根目录: `index.html` (可能是登录页或主看板), `register.html`, `README.md`
+    *   根目录: `public/index.html` (登录页), `register.html`, `README.md`
     *   `css/`: 存放所有 CSS 文件 (如 `style.css`, `layout.css`, `theme.css`)
     *   `js/`: 存放所有 JavaScript 文件 (如 `main.js`, `api.js`, `utils.js`)
     *   `pages/`: 存放各功能模块的 HTML 页面 (如 `parts_list.html`, `schedule_management.html`)
