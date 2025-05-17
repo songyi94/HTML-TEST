@@ -170,23 +170,37 @@ document.addEventListener('DOMContentLoaded', function() {
     // 函数：加载并显示备件总数
     async function loadTotalPartsCount() {
         if (!totalPartsCountElement) return;
-        totalPartsCountElement.textContent = '加载中...';
-        const apiUrl = `https://api.vika.cn/fusion/v1/datasheets/${PARTS_DATASHEET_ID}/records?viewId=viwFnt41r3C4K&fieldKey=name`;
+        
+        // 不再需要设置"加载中..."文本，因为HTML中已包含加载动画
+        
+        // 修改API请求，使用count接口而不是获取所有记录
+        // 添加pageSize=1参数减少返回数据量，我们只需要total字段
+        const apiUrl = `https://api.vika.cn/fusion/v1/datasheets/${PARTS_DATASHEET_ID}/records?viewId=viwFnt41r3C4K&fieldKey=name&pageSize=1`;
+        
         try {
             const response = await fetch(apiUrl, {
                 method: 'GET',
-                headers: { 'Authorization': `Bearer ${API_TOKEN}` }
+                headers: { 
+                    'Authorization': `Bearer ${API_TOKEN}`,
+                    'Content-Type': 'application/json' 
+                }
             });
+            
             if (!response.ok) throw new Error(`API请求失败: ${response.status}`);
+            
             const responseData = await response.json();
+            
             if (responseData.success && responseData.data) {
-                totalPartsCountElement.textContent = responseData.data.total; // API直接返回总数
+                // 设置数字格式，添加千位分隔符，使显示更美观
+                const totalCount = responseData.data.total;
+                // 清除加载动画并显示总数
+                totalPartsCountElement.innerHTML = totalCount.toLocaleString('zh-CN');
             } else {
                 throw new Error(responseData.message || '获取总数API业务错误');
             }
         } catch (error) {
             console.error('加载备件总数失败:', error);
-            totalPartsCountElement.textContent = '获取失败';
+            totalPartsCountElement.innerHTML = '获取失败';
         }
     }
 

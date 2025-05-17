@@ -109,71 +109,129 @@ body, html {
 /* --- 备件管理主页特定样式 --- */
 .parts-dashboard-content h2 {
     color: #333;
-    margin-bottom: 20px;
-    font-size: 22px;
+    margin-bottom: 24px; /* 增加主标题下方间距 */
+    font-size: 24px; /* 稍大一点的主标题 */
+    font-weight: 600; /* 主标题加粗 */
 }
 
 .stats-cards {
     display: flex; /* 卡片使用flex布局 */
     gap: 20px; /* 卡片之间的间距 */
     margin-bottom: 30px; /* 统计卡片区域下边距 */
+    /* justify-content: center; /* 移除，让卡片默认左对齐，如果只有一个卡片且希望居中，可以在特定页面覆盖或用grid */
 }
 
 .stat-card {
-    background-color: #fff; /* 卡片背景白色 */
-    padding: 20px; /* 内边距 */
-    border-radius: 8px; /* 圆角 */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.09); /* 轻微阴影 */
-    flex-grow: 1; /* 卡片等分布局 */
-    text-align: center; /* 文字居中 */
+    background-color: #ffffff; /* 卡片背景白色 */
+    padding: 20px 24px; /* 调整内边距 上下20px, 左右24px */
+    border-radius: 12px; /* 更圆润的边角 */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* 更柔和的阴影 */
+    width: auto; /* 宽度自动，由内容和min/max决定 */
+    min-width: 260px; /* 设定最小宽度 */
+    max-width: 300px; /* 设定最大宽度，避免过宽 */
+    text-align: left; /* 卡片内文字左对齐 */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* 添加过渡效果 */
 }
 
+.stat-card:hover {
+    /* transform: translateY(-3px); /* 鼠标悬浮时轻微上移 */
+    /* box-shadow: 0 6px 16px rgba(0,0,0,0.1); /* 悬浮时阴影加深 */
+}
+
+/* --- 统计卡片内部文字样式 --- */
 .stat-card h3 {
-    margin: 0 0 10px 0; /* 标题下边距 */
-    font-size: 16px; /* 字体大小 */
-    color: #555;
+    margin: 0 0 6px 0; /* 标题下边距 */
+    font-size: 14px; /* 标题字体大小 */
+    font-weight: 500; /* 标题字体重量 (Medium) */
+    color: #6c757d; /* 标题颜色 (类似Apple的二级文本颜色) - 较暗的灰色 */
 }
 
-.stat-card p {
+.stat-card p#totalPartsCount {
     margin: 0;
-    font-size: 28px; /* 数字大小 */
-    font-weight: bold;
-    color: #1890ff;
+    font-size: 30px; /* 数字字体大小 */
+    font-weight: 600; /* 数字字体加粗 (Semibold) */
+    color: #1d1d1f; /* 数字颜色 (类似Apple的主要文本颜色) - 深灰色近黑 */
+    line-height: 1.2; /* 行高 */
+    display: flex; /* 使用flex布局对齐加载动画和文本 */
+    align-items: center; /* 垂直居中对齐 */
 }
 
+/* --- "加载中... 文本特定样式 --- */
+.stat-card p .loading-text {
+    font-size: 15px; /* "加载中... 文本大小 */
+    color: #86868b;  /* "加载中... 文本颜色 (Apple辅助文本颜色) - 中灰色 */
+    font-weight: 400; /* "加载中... 文本字重 (Regular) */
+    margin-left: 8px; /* 与加载动画的间距 */
+    line-height: initial; /* 重置行高，避免被p的line-height影响动画对齐 */
+}
+
+/* --- 加载动画样式调整 --- */
+.loading-spinner {
+    display: inline-block;
+    width: 18px; /* 调整加载动画大小 */
+    height: 18px; /* 调整加载动画大小 */
+    border: 2.5px solid rgba(0, 122, 255, 0.25); /* Apple蓝色的浅色，边框稍粗一点 */
+    border-radius: 50%;
+    border-top-color: #007aff; /* Apple主题蓝色 */
+    animation: spin 0.8s infinite linear; /* 动画速度 */
+    /* margin-right is handled by .loading-text's margin-left */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 当加载完成时隐藏加载动画的逻辑由JS负责清除整个内容并替换为数字，CSS无需额外处理 */
+
+/* --- 导航按钮区域样式 --- */
 .navigation-buttons {
     display: flex;
-    flex-wrap: wrap; /* 允许换行 */
-    gap: 15px; /* 按钮间距 */
+    flex-wrap: wrap; /* 允许按钮换行 */
+    gap: 12px; /* 按钮之间的间距 */
+    margin-top: 20px; /* 与上方卡片区域的间距 */
 }
 
 .navigation-buttons .nav-button {
-    background-color: #1890ff; /* 按钮背景色 */
+    background-color: #007aff; /* Apple主题蓝色 */
     color: white; /* 文字颜色 */
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
+    padding: 10px 18px; /* 内边距 (上下10px, 左右18px) */
+    border: none; /* 无边框 */
+    border-radius: 8px; /* 更圆润的边角 */
     text-decoration: none; /* 去除链接下划线 */
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-align: center;
+    font-size: 15px; /* 字体大小 */
+    font-weight: 500; /* 字体重量 (Medium) */
+    cursor: pointer; /* 鼠标手型 */
+    transition: background-color 0.2s ease, transform 0.1s ease; /* 过渡效果 */
+    text-align: center; /* 文字居中 */
+    min-width: 120px; /* 按钮最小宽度 */
 }
 
 .navigation-buttons .nav-button:hover {
-    background-color: #0056b3; /* 鼠标悬停颜色加深 */
+    background-color: #005ecb; /* 鼠标悬停颜色稍深 */
+}
+
+.navigation-buttons .nav-button:active {
+    transform: scale(0.98); /* 点击时轻微缩小效果 */
+    background-color: #0056bf; /* 点击时颜色再深一点 */
 }
 
 /* "导入Excel更新备件"按钮的特定样式 */
+/* 为了风格统一，暂时也用蓝色系，或考虑用灰色系二级按钮 */
 .navigation-buttons .import-excel-btn {
-    background-color: #ffc107; /* 使用黄色作为导入操作的醒目颜色 */
-    color: #212529; /* 深色文字以保证对比度 */
-    border: 1px solid #dda800;
+    background-color: #f0f0f0; /* 浅灰色背景 */
+    color: #007aff; /* Apple主题蓝色文字 */
+    border: 1px solid #d1d1d6; /* 浅灰色边框 */
 }
 
 .navigation-buttons .import-excel-btn:hover {
-    background-color: #e0a800; /* 悬停时颜色加深 */
-    border-color: #c99700;
+    background-color: #e5e5ea; /* 悬停时背景色稍深 */
+    border-color: #c7c7cc;
+}
+
+.navigation-buttons .import-excel-btn:active {
+    background-color: #dcdce0;
+    transform: scale(0.98);
 }
 
 /* --- 导入进度条区域样式 --- */
