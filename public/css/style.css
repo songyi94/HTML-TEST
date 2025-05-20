@@ -1,93 +1,204 @@
-/* css/style.css - 全局及登录页面样式 */
+/* css/style.css - 全局及登录页面样式 (Play Sign In Form风格) */
 
 /* --- 基础重置和全局设置 --- */
 body, html {
-    margin: 0; /* 移除默认的外边距 */
-    padding: 0; /* 移除默认的内边距 */
-    font-family: 'Arial', 'Microsoft YaHei', sans-serif; /* 设置默认字体，优先使用Arial，中文环境使用微软雅黑，最后使用无衬线字体 */
-    background-color: #f4f7f6; /* 设置页面背景颜色为一个柔和的浅灰色 */
-    display: flex; /* 使用flex布局，方便子元素居中 */
-    justify-content: center; /* 水平居中 */
-    align-items: center; /* 垂直居中 */
-    min-height: 100vh; /* 设置body最小高度为视口高度，确保内容在少时也能撑满屏幕并居中 */
-    color: #333; /* 设置默认文字颜色 */
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #e9eaf2; /* 图片中的浅灰色背景 */
+    color: #434449; /* 默认文字颜色 */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* 使页脚可以固定在底部 */
+    align-items: center; /* 水平居中主要内容 */
+    padding: 30px 20px; /* 顶部padding，左右padding防止内容贴边 */
+    box-sizing: border-box;
 }
 
-/* --- 登录容器样式 --- */
-.login-container {
-    background-color: #ffffff; /* 登录框背景色为白色 */
-    padding: 30px 40px; /* 内边距，上下30px，左右40px */
-    border-radius: 8px; /* 圆角边框 */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 添加阴影效果，增加立体感 */
-    width: 100%; /* 宽度 */
-    max-width: 400px; /* 最大宽度，防止在大屏幕上过宽 */
-    text-align: center; /* 内部文本居中 */
+/* --- 页面顶部标题 --- */
+.page-top-title {
+    text-align: center;
+    margin-bottom: 30px; /* 调整与下方卡片的间距 */
 }
 
-.login-container h1 {
-    color: #2c3e50; /* 标题颜色，深蓝灰色 */
-    margin-bottom: 25px; /* 标题下边距 */
-    font-size: 24px; /* 标题字号 */
+.page-top-title h2 {
+    font-size: 26px; /* 调整字体大小 */
+    font-weight: 600;
+    color: #3b3c40;
 }
 
-/* --- 表单组样式 --- */
-.form-group {
-    margin-bottom: 20px; /* 表单项之间的下边距 */
-    text-align: left; /* 组内文本左对齐 */
+/* --- 主卡片容器 --- */
+.play-signin-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 12px 50px rgba(0, 0, 0, 0.15); /* 调整阴影使其更明显 */
+    display: flex;
+    width: 100%;
+    max-width: 1000px; /* 增大最大宽度，以适应图片 */
+    min-height: 550px; /* 设定一个最小高度，防止内容过少时太扁 */
+    overflow: hidden;
+    margin-bottom: auto;
 }
 
-.form-group label {
-    display: block; /* 让标签独占一行 */
-    margin-bottom: 8px; /* 标签和输入框之间的距离 */
-    color: #555; /* 标签文字颜色 */
-    font-weight: bold; /* 字体加粗 */
+/* --- 左侧插画区域 --- */
+.illustration-panel {
+    flex: 0 0 58%; /* 固定左侧比例，例如58% */
+    background-color: #f0f0f8; /* 保持淡紫色背景作为底色 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0; /* 移除padding，让图片完全填充 */
+    box-sizing: border-box;
+    overflow: hidden; /* 确保图片按容器边界裁剪 */
 }
 
-.form-group input[type="text"],
-.form-group input[type="password"] {
-    width: calc(100% - 22px); /* 输入框宽度，减去左右padding和border的宽度 */
-    padding: 10px; /* 输入框内边距 */
-    border: 1px solid #ddd; /* 边框颜色 */
-    border-radius: 4px; /* 圆角 */
-    font-size: 16px; /* 字体大小 */
-    transition: border-color 0.3s ease; /* 边框颜色变化过渡效果 */
+.illustration-panel img {
+    width: 100%; /* 图片宽度充满容器 */
+    height: 100%; /* 图片高度充满容器 */
+    object-fit: cover; /* 覆盖整个区域，可能会裁剪图片边缘以保持比例 */
+    /* 如果希望图片完整显示不裁剪，即使留白，可以使用 object-fit: contain; */
 }
 
-.form-group input[type="text"]:focus,
-.form-group input[type="password"]:focus {
-    border-color: #007bff; /* 输入框获取焦点时的边框颜色，蓝色 */
-    outline: none; /* 移除默认的outline效果 */
+.illustration-panel .illustration-placeholder-text {
+    font-size: 22px; /* 调整占位文字大小 */
+    color: #b0b0c0; /* 调整占位文字颜色 */
+    text-align: center;
 }
 
-/* --- 按钮样式 --- */
-.form-group button {
-    width: 100%; /* 按钮宽度充满容器 */
-    padding: 12px; /* 内边距 */
-    background-color: #007bff; /* 背景颜色，蓝色 */
-    color: white; /* 文字颜色，白色 */
-    border: none; /* 无边框 */
-    border-radius: 4px; /* 圆角 */
-    font-size: 16px; /* 字体大小 */
-    cursor: pointer; /* 鼠标悬停时显示手型光标 */
-    transition: background-color 0.3s ease; /* 背景颜色变化过渡效果 */
+/* --- 右侧表单区域 --- */
+.form-panel {
+    flex: 0 0 42%; /* 右侧占据剩余空间 */
+    padding: 40px 50px; /* 调整内边距 */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.form-group button:hover {
-    background-color: #0056b3; /* 鼠标悬停时按钮背景颜色变深 */
+.form-panel h3 {
+    font-size: 26px;
+    font-weight: 600;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 35px;
+    text-align: left;
 }
 
-/* --- 注册链接样式 --- */
-.register-link {
-    margin-top: 20px; /* 与上方元素的间距 */
-    font-size: 14px; /* 字体大小 */
-    color: #555; /* 文字颜色 */
+/* --- 输入框组 --- */
+.input-field-group {
+    margin-bottom: 30px;
+    position: relative; /* 用于未来可能的图标定位 */
 }
 
-.register-link a {
-    color: #007bff; /* 链接颜色，蓝色 */
-    text-decoration: none; /* 去除下划线 */
+.input-field-group input[type="text"],
+.input-field-group input[type="password"] {
+    width: 100%;
+    padding: 10px 0 10px 5px;
+    border: none;
+    border-bottom: 2px solid #e0e0e0; /* 底部边框 */
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    background-color: transparent;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
 }
 
-.register-link a:hover {
-    text-decoration: underline; /* 鼠标悬停时显示下划线 */
+.input-field-group input[type="text"]::placeholder,
+.input-field-group input[type="password"]::placeholder {
+    color: #aaa;
+    font-weight: 400;
+}
+
+.input-field-group input[type="text"]:focus,
+.input-field-group input[type="password"]:focus {
+    outline: none;
+    border-bottom-color: #6a5af9; /* 图片中按钮和高亮颜色 */
+}
+
+/* --- 表单选项 (记住我, 忘记密码) --- */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    font-size: 14px;
+}
+
+.remember-me-label {
+    color: #555;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.remember-me-label input[type="checkbox"] {
+    margin-right: 8px;
+    accent-color: #6a5af9; /* 复选框勾选颜色 */
+    width: 15px; /* 增大复选框点击区域 */
+    height: 15px;
+}
+
+.forgot-password-link {
+    color: #6a5af9;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
+}
+
+/* --- 登录按钮 --- */
+.form-group-button {
+    margin-bottom: 30px;
+}
+
+.signin-action-button {
+    width: 100%;
+    padding: 14px;
+    background-color: #6a5af9; /* 图片中按钮颜色 */
+    color: white;
+    border: none;
+    border-radius: 25px; /* 非常圆的角 */
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.signin-action-button:hover {
+    background-color: #5848d8;
+}
+
+.signin-action-button:active {
+    transform: scale(0.98);
+}
+
+/* --- 注册提示链接 --- */
+.signup-prompt {
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+    margin-top: 0; /* signup-prompt 的上边距由 form-group-button 的 margin-bottom 控制 */
+}
+
+.signup-prompt a {
+    color: #6a5af9;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signup-prompt a:hover {
+    text-decoration: underline;
+}
+
+/* --- 页面底部版权 --- */
+.page-bottom-footer {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+    font-size: 13px;
+    color: #888;
 } 

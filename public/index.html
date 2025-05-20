@@ -3,30 +3,55 @@
 <head>
     <meta charset="UTF-8"> <!-- 设置字符编码为UTF-8，支持中文字符 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 设置视口，用于响应式设计 -->
-    <title>用户登录 - 组装维修小工具</title> <!-- 页面标题 -->
-    <link rel="stylesheet" href="css/style.css"> <!-- 链接外部CSS样式文件，路径更新为相对于 public/ -->
+    <title>登录 - 组装维修小工具</title> <!-- 页面标题 -->
+    <link rel="stylesheet" href="css/style.css"> <!-- 链接外部CSS样式文件 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="login-container"> <!-- 登录表单的容器 -->
-        <h1>用户登录</h1> <!-- 页面主标题 -->
-        <form id="loginForm"> <!-- 登录表单，通过id标识 -->
-            <div class="form-group"> <!-- 表单项分组 -->
-                <label for="username">用户名:</label> <!-- 用户名标签 -->
-                <input type="text" id="username" name="username" required> <!-- 用户名输入框，文本类型，必填 -->
+    <header class="page-top-title">
+        <h2>欢迎回来！请登录</h2> <!-- 页面顶部标题 -->
+    </header>
+
+    <div class="play-signin-container"> <!-- 主卡片容器 -->
+        <div class="illustration-panel"> <!-- 左侧插画区域 -->
+            <img src="assets/11.png" alt="登录插画"> <!-- 更正图片路径 -->
+        </div>
+
+        <div class="form-panel"> <!-- 右侧表单区域 -->
+            <h3>用户登录</h3> <!-- 表单标题 -->
+            <form id="loginForm">
+                <div class="input-field-group with-icon">
+                    <!-- 未来可在此处添加图标 -->
+                    <!-- <span class="input-icon user-icon"></span> -->
+                    <input type="text" id="username" name="username" placeholder="邮箱或用户名" required>
+                </div>
+                <div class="input-field-group with-icon">
+                    <!-- <span class="input-icon password-icon"></span> -->
+                    <input type="password" id="password" name="password" placeholder="密码" required>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me-label">
+                        <input type="checkbox" name="rememberMe"> 记住我
+                    </label>
+                    <a href="#" class="forgot-password-link">忘记密码?</a>
+                </div>
+
+                <div class="form-group-button">
+                    <button type="submit" class="signin-action-button">登录</button>
+                </div>
+            </form>
+
+            <div class="signup-prompt">
+                <p>还没有账户? <a href="register.html">立即注册</a></p>
             </div>
-            <div class="form-group"> <!-- 表单项分组 -->
-                <label for="password">密码:</label> <!-- 密码标签 -->
-                <input type="password" id="password" name="password" required> <!-- 密码输入框，密码类型，必填 -->
-            </div>
-            <div class="form-group"> <!-- 表单项分组 -->
-                <button type="submit">登录</button> <!-- 提交按钮 -->
-            </div>
-        </form>
-        <p class="register-link"> <!-- 注册链接段落 -->
-            还没有账户? <a href="register.html">立即注册</a> <!-- 指向注册页面的链接，路径更新为相对于 public/ -->
-        </p>
+        </div>
     </div>
 
-    <script src="js/login.js"></script> <!-- 链接外部JavaScript文件，路径更新为相对于 public/ -->
+    <footer class="page-bottom-footer">
+        <p>&copy; 2024 组装维修小工具. 版权所有 | 由 Gemini 助手设计</p>
+    </footer>
+
+    <script src="js/login.js"></script> <!-- 链接外部JavaScript文件 -->
 </body>
 </html> 
